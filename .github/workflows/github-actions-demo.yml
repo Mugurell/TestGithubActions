@@ -1,0 +1,26 @@
+name: GitHub Actions Demo
+
+on:
+  schedule:
+    # Every 5 minutes (the lowest delay possible)
+    - cron: '5 * * * *'
+
+jobs:
+  Explore-GitHub-Actions:
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Discover latest beta version"
+        id: latest-beta-version
+        uses: Mugurell/TestGithubActions@3
+      - run: echo "🎉 The job was automatically triggered"
+      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
+      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
+      - name: Check out repository code
+        uses: actions/checkout@v3
+      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
+      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
+      - name: List files in the repository
+        run: |
+          ls ${{ github.workspace }}
+      - run: echo "Latest beta version is \"${{ steps.latest-beta-version.outputs.beta_version }}\""
+      - run: echo "🍏 This job's status is ${{ job.status }}."
