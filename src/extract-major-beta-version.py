@@ -57,7 +57,7 @@ if __name__ == "__main__":
 
     verbose = os.getenv("VERBOSE") == "true"
 
-    repository = os.getenv("GITHUB_REPOSITORY")
+    repository = github.get_repo(os.getenv("GITHUB_REPOSITORY"))
     if not repository:
         print("[E] No GITHUB_REPOSITORY set. Exiting.")
         sys.exit(1)
