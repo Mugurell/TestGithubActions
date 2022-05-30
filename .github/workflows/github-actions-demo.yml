@@ -1,9 +1,7 @@
 name: GitHub Actions Demo
 
 on:
-  schedule:
-    # Every 5 minutes (the lowest delay possible)
-    - cron: '5 * * * *'
+  workflow_dispatch:
 
 jobs:
   Explore-GitHub-Actions:
