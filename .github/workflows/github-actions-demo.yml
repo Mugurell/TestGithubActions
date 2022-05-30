@@ -9,7 +9,7 @@ jobs:
     steps:
       - name: "Discover latest beta version"
         id: latest-beta-version
-        uses: Mugurell/TestGithubActions@3.0.0
+        uses: Mugurell/TestGithubActions@3.0.1
       - run: echo "🎉 The job was automatically triggered"
       - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
       - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
@@ -20,5 +20,5 @@ jobs:
       - name: List files in the repository
         run: |
           ls ${{ github.workspace }}
-      - run: echo "Latest beta version is \"${{ steps.latest-beta-version.outputs.beta_version }}\""
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+      - run: echo "Latest beta version is \"$${{ steps.latest-beta-version.outputs.beta_version }}\""
+      - run: echo "🍏 This job's status is {{ job.status }}."
