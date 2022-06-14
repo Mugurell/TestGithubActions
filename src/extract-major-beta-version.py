@@ -17,14 +17,14 @@ from github import Github, InputGitAuthor, enable_console_debug_logging
 
 def major_version_from_release_branch_name(branch_name):
     print(f"Extracting major version from branch: {branch_name}")
-    if matches := re.match(r"^releases_v(\d+)\.0\.0$", branch_name):
+    if matches := re.match(r"^releases[_/]v(\d+)\.0\.0$", branch_name):
         return int(matches[1])
     raise Exception(f"Unexpected release branch name: {branch_name}")
 
 
 def get_release_branches(repo):
     return [branch.name for branch in repo.get_branches()
-            if re.match(r"^releases_v\d+\.0\.0$", branch.name)]
+            if re.match(r"^releases[_/]v\d+\.0\.0$", branch.name)]
 
 
 def get_latest_release_major_version(repo):
