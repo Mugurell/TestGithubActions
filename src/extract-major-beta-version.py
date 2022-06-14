@@ -16,6 +16,7 @@ from github import Github, InputGitAuthor, enable_console_debug_logging
 
 
 def major_version_from_fenix_release_branch_name(branch_name):
+    print(f"Extracting major version from branch: {branch_name}")
     if matches := re.match(r"^releases[_/]v(\d+)\.0\.0$", branch_name):
         return int(matches[1])
     raise Exception(f"Unexpected release branch name: {branch_name}")
@@ -29,6 +30,9 @@ def get_fenix_release_branches(repo):
 def get_latest_fenix_version(repo):
     major_fenix_versions = [major_version_from_fenix_release_branch_name(branch_name)
                             for branch_name in get_fenix_release_branches(repo)]
+    print(f"Total major versions discovered:: {len(major_fenix_versions)}")
+    for i in range(0, len(major_fenix_versions)):
+        print(f" Major versions identified: {major_fenix_versions[i]}")
     if len(major_fenix_versions) > 0:
         return sorted(major_fenix_versions, reverse=True)[0]
 
