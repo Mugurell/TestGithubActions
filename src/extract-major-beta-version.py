@@ -24,6 +24,8 @@ def major_version_from_release_branch_name(branch_name):
 
 def get_release_branches(repo):
     print(f"Repo {repo} has {repo.get_branches().totalCount} branches")
+    for branch in repo.get_branches():
+        print(f"     Branch name: {branch.name}")
     return [branch.name for branch in repo.get_branches()
             if re.match(r"^releases_v\d+\.0\.0$", branch.name)]
 
@@ -60,7 +62,7 @@ if __name__ == "__main__":
         print("[E] Could not get authenticated user. Exiting.")
         sys.exit(1)
 
-    verbose = os.getenv("VERBOSE") == "true"
+    verbose = true
 
     repository = github.get_repo(os.getenv("GITHUB_REPOSITORY"))
     if not repository:
