@@ -24,7 +24,7 @@ def major_version_from_release_branch_name(branch_name):
 
 def get_release_branches(repo):
     branches = repo.get_branches()
-    print(f"Repo {repo} has {len(branches)} branches")
+    print(f"Repo {repo} has {branches.totalCount} branches")
     return [branch.name for branch in branches
             if re.match(r"^releases[_/]v\d+\.0\.0$", branch.name)]
 
