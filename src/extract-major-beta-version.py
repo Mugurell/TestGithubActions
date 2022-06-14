@@ -26,7 +26,7 @@ def get_release_branches(repo):
     branches = repo.get_branches()
     print(f"Repo {repo} has {branches.totalCount} branches")
     return [branch.name for branch in branches
-            if re.match(r"^releases[_/]v\d+\.0\.0$", branch.name)]
+        if re.match(r"^releases[_/]v\d+\.0($|.0$)", branch.name)]
 
 
 def get_latest_beta_major_version(repo):
