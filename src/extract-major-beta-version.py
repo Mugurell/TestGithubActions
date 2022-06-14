@@ -27,7 +27,7 @@ def get_release_branches(repo):
             if re.match(r"^releases[_/]v\d+\.0\.0$", branch.name)]
 
 
-def get_latest_release_major_version(repo):
+def get_latest_beta_major_version(repo):
     major_versions = [major_version_from_release_branch_name(branch_name)
                       for branch_name in get_release_branches(repo)]
     print(f"Total major versions discovered:: {len(major_versions)}")
@@ -76,21 +76,21 @@ if __name__ == "__main__":
     # - Look at version.txt to make sure that branch is actually in Beta
     #
 
-    latest_release_major_version = get_latest_release_major_version(repository)
-    if not latest_release_major_version:
-        print(f"[E] Could not determine the latest branch of \"{repository}\"")
+    last_beta_major_version = get_latest_beta_major_version(repository)
+    if not last_beta_major_version:
+        print(f"[E] Could not determine the latest beta branch of \"{repository}\"")
         sys.exit(1)
 
-    branch_name = f"releases_v{latest_release_major_version}.0.0"
+    branch_name = f"releases_v{last_beta_major_version}.0.0"
 
     if verbose:
         print(f"[I] Looking at branch \"{repository}:{branch_name}\"")
 
     if not is_beta_branch(repository, branch_name):
         print(f"Branch \"{repository}:{branch_name}\" is not in beta; returning an empty version")
-        latest_release_major_version = ""
+        last_beta_major_version = ""
 
     if verbose:
-        print(f"[I] Latest major beta version is: \"{latest_release_major_version}\"")
+        print(f"[I] Latest major beta version is: \"{last_beta_major_version}\"")
 
-    print(f"::set-output name=beta_version::{latest_release_major_version}")
+    print(f"::set-output name=beta_version::{last_beta_major_version}")
