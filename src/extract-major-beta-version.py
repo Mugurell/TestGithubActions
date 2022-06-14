@@ -23,11 +23,13 @@ def major_version_from_release_branch_name(branch_name):
 
 
 def get_release_branches(repo):
+    print(f"Repo {repo} has {len(repo.get_branches())} branches")
     return [branch.name for branch in repo.get_branches()
             if re.match(r"^releases[_/]v\d+\.0\.0$", branch.name)]
 
 
 def get_latest_beta_major_version(repo):
+    print("Extracting the major releases for {repo}")
     major_versions = [major_version_from_release_branch_name(branch_name)
                       for branch_name in get_release_branches(repo)]
     print(f"Total major versions discovered:: {len(major_versions)}")
