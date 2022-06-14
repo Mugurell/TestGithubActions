@@ -27,7 +27,7 @@ def get_release_branches(repo):
     for branch in repo.get_branches():
         print(f"     Branch name: {branch.name}")
     return [branch.name for branch in repo.get_branches()
-            if re.match(r"^releases_v\d+\.0\.0$", branch.name)]
+            if re.match(r"^releases_v\d+\.0($|.0$)", branch.name)]
 
 
 def get_latest_release_major_version(repo):
