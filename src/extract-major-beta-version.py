@@ -44,9 +44,11 @@ def is_beta_version(version):
     return re.compile(r'\d+.0.0-beta.\d+', re.MULTILINE).match(version)
 
 
-def is_beta_branch(repository, release_branch_name):
+def is_beta_branch(repository, branch_major_version):
     """Fetch version.txt from the given branch and throw an exception if it is not a Beta release"""
-    content_file = repository.get_contents("version.txt", ref=release_branch_name)
+    content_file = repository.get_contents("version.txt", ref=f"releases_v{branch_major_version}.0") or \
+                   repository.get_contents("version.txt", ref=f"releases_v{branch_major_version}.0.0")
+    print(f"Looking in file {content_file.path}")
     version = content_file.decoded_content.decode('utf8')
     return is_beta_version(version)
 
@@ -84,13 +86,8 @@ if __name__ == "__main__":
         print(f"[E] Could not determine the latest release branch of \"{repository}\"")
         sys.exit(1)
 
-    branch_name = f"releases_v{latest_release_major_version}.0.0"
-
-    if verbose:
-        print(f"[I] Looking at branch \"{repository}:{branch_name}\"")
-
-    if not is_beta_branch(repository, branch_name):
-        print(f"Branch \"{repository}:{branch_name}\" is not in beta; returning an empty version")
+    if not is_beta_branch(repository, latest_release_major_version):
+        print(f"Branch \"{repository}:{latest_release_major_version}\" is not in beta; returning an empty version")
         latest_release_major_version = ""
 
     if verbose:
