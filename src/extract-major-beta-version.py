@@ -61,12 +61,7 @@ if __name__ == "__main__":
 
     verbose = os.getenv("VERBOSE") == "true"
 
-    organization = os.getenv("GITHUB_REPOSITORY_OWNER")
-    if not organization:
-        print("[E] No GITHUB_REPOSITORY_OWNER set. Exiting.")
-        sys.exit(1)
-
-    repository = github.get_repo(f"{organization}/fenix")
+    repository = github.get_repo(os.getenv("GITHUB_REPOSITORY"))
     if not repository:
         print("[E] No GITHUB_REPOSITORY set. Exiting.")
         sys.exit(1)
