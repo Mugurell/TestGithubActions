@@ -67,7 +67,7 @@ if __name__ == "__main__":
         print("[E] No GITHUB_REPOSITORY_OWNER set. Exiting.")
         sys.exit(1)
 
-    fenix_repo = github.get_repo(f"{organization}/focus-android")
+    fenix_repo = github.get_repo(f"{organization}/fenix")
 
     if verbose:
         print(f"[I] Looking at Fenix at {fenix_repo.full_name}")
@@ -81,13 +81,13 @@ if __name__ == "__main__":
 
     latest_fenix_version = get_latest_fenix_version(fenix_repo)
     if not latest_fenix_version:
-        print(f"[E] Could not determine current A-C version on {organization}/focus-android")
+        print(f"[E] Could not determine current A-C version on {organization}/fenix")
         sys.exit(1)
 
     branch_name = f"releases_v{latest_fenix_version}.0.0"
 
     if verbose:
-        print(f"[I] Looking at Fenix branch {organization}/focus-android:{branch_name}")
+        print(f"[I] Looking at Fenix branch {organization}/fenix:{branch_name}")
 
     if not is_fenix_beta_branch(fenix_repo, branch_name):
         print(f"Branch {organization}/fenix:{branch_name} is not in beta; returning an empty version")
