@@ -66,7 +66,7 @@ if __name__ == "__main__":
         print("[E] No GITHUB_REPOSITORY_OWNER set. Exiting.")
         sys.exit(1)
 
-    repository = github.get_repo(f"{organization}/focus-android")
+    repository = github.get_repo(f"{organization}/fenix")
     if not repository:
         print("[E] No GITHUB_REPOSITORY set. Exiting.")
         sys.exit(1)
