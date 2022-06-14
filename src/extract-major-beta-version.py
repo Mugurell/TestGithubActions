@@ -30,7 +30,7 @@ def get_release_branches(repo):
 def get_latest_release_major_version(repo):
     major_versions = [major_version_from_release_branch_name(branch_name)
                             for branch_name in get_release_branches(repo)]
-    print(f"Major versions discovered: {major_versions[i]}")
+    print(f"Total major versions discovered:: {len(major_versions)}")
     for i in range(0, len(major_versions)):
         print(f" Major versions identified: {major_versions[i]}")
     if len(major_versions) > 0:
